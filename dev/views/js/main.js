@@ -374,13 +374,10 @@ var pizzaElementGenerator = function(i) {
 
   pizzaContainer.id = "pizza" + i;  // gives each pizza element a unique id
   pizzaContainer.classList.add("randomPizzaContainer");
-  // pizzaContainer.style.width = "33.33%";
-  // pizzaContainer.style.height = "325px";
   pizzaImageContainer.classList.add("col-md-6");
 
   pizzaImage.src = "images/scaled/pizza.png";
   pizzaImage.classList.add("img-responsive");
-  // pizzaImage.style.width = "100%";
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
 
@@ -421,46 +418,24 @@ var resizePizzas = function(size) {
 
   changeSliderLabel(size);
 
-  // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
-    var oldwidth = elem.offsetWidth;
-    var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldsize = oldwidth / windowwidth;
-
-    // TODO: change to 3 sizes? no more xl?
-    // Changes the slider value to a percent width
-    function sizeSwitcher(size) {
-      switch(size) {
-        case "1":
-          return 0.25;
-        case "2":
-          return 0.3333;
-        case "3":
-          return 0.5;
-        default:
-          console.log("bug in sizeSwitcher");
-      }
+  function sizeSwitcher(s) {
+    switch(s) {
+      case "1":
+        return 0.25;
+      case "2":
+        return 0.3333;
+      case "3":
+        return 0.5;
+      default:
+        console.log("bug in sizeSwitcher");
     }
-
-    var newsize = sizeSwitcher(size);
-    var dx = (newsize - oldsize) * windowwidth;
-
-    return dx;
   }
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-
-    // take the query outside the for loop
     var c = document.querySelectorAll(".randomPizzaContainer");
-    // console.log(c);
     for (var i = 0; i < c.length; i++) {
-      var dx = determineDx(c[i], size);
-      var newWidth = (c[i].offsetWidth + dx) + 'px';
-      c[i].style.width = newWidth;
-
-      // console.log("dx" + i + ": " + dx);
-      // console.log("newwidth" + i + ": " + newwidth);
+      c[i].style.width = (sizeSwitcher(size) * 1170) + 'px';
     }
   }
 
