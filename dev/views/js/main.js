@@ -372,15 +372,15 @@ var pizzaElementGenerator = function(i) {
   pizzaImage = document.createElement("img");
   pizzaDescriptionContainer = document.createElement("div");
 
+  pizzaContainer.id = "pizza" + i;  // gives each pizza element a unique id
   pizzaContainer.classList.add("randomPizzaContainer");
   pizzaContainer.style.width = "33.33%";
-  pizzaContainer.style.height = "325px";
-  pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
+  // pizzaContainer.style.height = "325px";
   pizzaImageContainer.classList.add("col-md-6");
 
   pizzaImage.src = "images/scaled/pizza.png";
-  pizzaImage.width = "164px";
-  pizzaImage.height = "212px";
+  // pizzaImage.width = "164px";
+  // pizzaImage.height = "212px";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
@@ -453,7 +453,7 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 
-    // take the query outside the for loop
+    //take the query outside the for loop
     var c = document.querySelectorAll(".randomPizzaContainer");
     for (var i = 0; i < c.length; i++) {
       var dx = determineDx(c[i], size);
@@ -481,6 +481,7 @@ for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
+
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
