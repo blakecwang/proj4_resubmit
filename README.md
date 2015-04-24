@@ -1,5 +1,7 @@
 ## Website Performance Optimization portfolio project
 
+How to run: Open index.html and enjoy the site.
+
 OPTIMMIZATIONS:
 
 index.html
@@ -11,7 +13,7 @@ index.html
 
 pizza.html
 
-	- removed queries from for loops in changePizzaSize()
+	- removed queries and constants from for loops in changePizzaSize()
 	  and updatePosition() functions
 	- compressed images and updated/specified image dims
 	- minified everything in views directory
