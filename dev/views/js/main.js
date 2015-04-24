@@ -374,17 +374,14 @@ var pizzaElementGenerator = function(i) {
 
   pizzaContainer.id = "pizza" + i;  // gives each pizza element a unique id
   pizzaContainer.classList.add("randomPizzaContainer");
-  pizzaContainer.style.width = "33.33%";
+  // pizzaContainer.style.width = "33.33%";
   // pizzaContainer.style.height = "325px";
   pizzaImageContainer.classList.add("col-md-6");
 
   pizzaImage.src = "images/scaled/pizza.png";
-  // pizzaImage.width = "164px";
-  // pizzaImage.height = "212px";
   pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
-
 
   pizzaDescriptionContainer.classList.add("col-md-6");
 
@@ -431,7 +428,7 @@ var resizePizzas = function(size) {
 
     // TODO: change to 3 sizes? no more xl?
     // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
+    function sizeSwitcher(size) {
       switch(size) {
         case "1":
           return 0.25;
@@ -453,13 +450,14 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 
-    //take the query outside the for loop
+    // take the query outside the for loop
     var c = document.querySelectorAll(".randomPizzaContainer");
+    // console.log(c);
     for (var i = 0; i < c.length; i++) {
       var dx = determineDx(c[i], size);
-      var newwidth = (c[i].offsetWidth + dx) + 'px';
-      console.log(document);
-      document.c[i].style.width = newwidth;
+      var newWidth = (c[i].offsetWidth + dx) + 'px';
+      c[i].style.width = newWidth;
+
       // console.log("dx" + i + ": " + dx);
       // console.log("newwidth" + i + ": " + newwidth);
     }
