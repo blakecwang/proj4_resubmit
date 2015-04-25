@@ -476,25 +476,28 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
     sum = sum + times[i].duration;
   }
   console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
-  console.log("which is " + 10000 / sum + 'fps!');
 }
 
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+
+
+
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  // take items definition outside the for loop to minimize
-  // the number of queries
   var items = document.querySelectorAll('.mover');
   var scrollPosition = document.body.scrollTop / 1250;
+  console.log(scrollPosition + ' ' + frame);
+  var phase = [];
+  for (var j = 0; j < 5; j++) {
+     phase.push(Math.sin(scrollPosition + j));
+  }
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(scrollPosition + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    // console.log("phase" + i + ": " + phase);
+    items[i].style.left = items[i].basicLeft + 100 * phase[i % 5] + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
