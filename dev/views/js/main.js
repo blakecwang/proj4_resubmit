@@ -484,20 +484,38 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 
 
+// figure out phase
+//    
+// add it to basicLeft of every item
 
+// keep an array with the positions of all the mver pizzas
+// only update the ones you can see
+
+
+
+
+var scrollPosition = 0;
+var phase = [];
+for (var j = 0; j < 5; j++) {
+   phase.push(Math.sin(j));
+}
+
+function changePositions() {
+  var newArray = [];
+  newArray.push(array[array.length - 1]);
+  for (var i=1; i<array.length; i++) {
+    newArray.push(array[i - 1]);
+  }
+}
 
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var items = document.querySelectorAll('.mover');
-  var scrollPosition = document.body.scrollTop / 1250;
-  console.log(scrollPosition + ' ' + frame);
-  var phase = [];
-  for (var j = 0; j < 5; j++) {
-     phase.push(Math.sin(scrollPosition + j));
-  }
+  changePositions(slidePositions);
   for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase[i % 5] + 'px';
+    // items[i].style.left = items[i].basicLeft + 100 * phase[i % 5] + 'px';
+    items[i].style.left = itemPositions[i];
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -514,6 +532,7 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+var slidePositions = [];
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
@@ -524,8 +543,11 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
+    slidePositions.push(elem.basicLeft);
+    // console.log(slidePositions);
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
+
