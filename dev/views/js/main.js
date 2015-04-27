@@ -485,10 +485,12 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
+  // use getElementsByClassName instead of querySelectorAll
+  // take var definitions outside for loop
   var items = document.getElementsByClassName('mover');
-  // var items = document.querySelectorAll('.mover');
   var scrollPosition = document.body.scrollTop / 1250;
   var phase = [];
+  // Take the call to Math.sin() out of the main for loop and only call it 5 times
   for (var j = 0; j < 5; j++) {
      phase.push(Math.sin(scrollPosition + j));
   }
@@ -510,10 +512,11 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
+// only create visible pizzas
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 21; i++) {
+  for (var i = 0; i < 24; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/scaled/pizza.png";
